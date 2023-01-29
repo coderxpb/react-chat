@@ -1,13 +1,21 @@
 .search {
-  width: 100%;
-  max-width: 300px;
-
+  width: calc(100% - 16px);
+  margin-left: 8px;
   &Form {
     width: 100%;
 
     &Input {
-      margin: 0 8px 0 8px;
       width: 100%;
+    }
+  }
+}
+
+.user {
+  &Card {
+    background: #d4efdf;
+
+    &:hover {
+      background: #a9dfbf;
     }
   }
 }

@@ -1,9 +1,10 @@
 import React from "react";
 import Search from "../atoms/Search";
+import localClasses from "./sidebar.module.scss";
 
 const Sidebar = () => {
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div className={localClasses.sidebar}>
       <div></div>
       <Search />
     </div>

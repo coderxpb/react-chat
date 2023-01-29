@@ -16,7 +16,7 @@ const Search = () => {
         />
       </div>
 
-      <div className={classes.userCard}>
+      <div className={`${classes.userCard} ${localClasses.userCard}`}>
         <img
           className={classes.userImage}
           alt="Default-avatar"

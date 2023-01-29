@@ -9,13 +9,9 @@ const Home = () => {
     <div className={localClasses.home}>
       <Navbar />
       <div className={localClasses.homeContainer}>
-        <div>
-          <Sidebar />
-        </div>
+        <Sidebar />
 
-        <div>
-          <Chat />
-        </div>
+        <Chat />
       </div>
     </div>
   );
