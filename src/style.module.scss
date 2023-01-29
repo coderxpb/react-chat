@@ -63,6 +63,39 @@
   }
 }
 
+.user {
+  &Image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &Card {
+    display: flex;
+    gap: 8px;
+    padding: 10px 8px 10px 8px;
+    &Chat {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &Title {
+      font-size: 13px;
+      color: #229954;
+      font-weight: 700;
+      line-height: 20px;
+    }
+
+    &Subtitle {
+      font-size: 11px;
+      color: #52be80;
+      line-height: 14px;
+    }
+  }
+}
+
 .title {
   margin: 0;
   font-size: 24px;
@@ -74,7 +107,4 @@
   margin: 0;
   font-size: 12px;
   color: #229954;
-}
-
-.label {
 }

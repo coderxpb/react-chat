@@ -1,0 +1,13 @@
+.search {
+  width: 100%;
+  max-width: 300px;
+
+  &Form {
+    width: 100%;
+
+    &Input {
+      margin: 0 8px 0 8px;
+      width: 100%;
+    }
+  }
+}
