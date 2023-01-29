@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import classes from "../../style.module.scss";
+import userClasses from "../molecules/usercard.module.scss";
 import localClasses from "./search.module.scss";
 const Search = () => {
   const [username, setUsername] = useState("");
@@ -16,14 +17,14 @@ const Search = () => {
         />
       </div>
 
-      <div className={`${classes.userCard} ${localClasses.userCard}`}>
+      <div className={`${userClasses.userCard} ${localClasses.userCard}`}>
         <img
-          className={classes.userImage}
+          className={userClasses.userImage}
           alt="Default-avatar"
           src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg"
         />
-        <div className={classes.userCardChat}>
-          <span className={classes.userCardTitle}>Pankaj</span>
+        <div className={userClasses.userCardChat}>
+          <span className={userClasses.userCardTitle}>Pankaj</span>
           {/* <span className={classes.userCardSubtitle}>Hey about that </span> */}
         </div>
       </div>

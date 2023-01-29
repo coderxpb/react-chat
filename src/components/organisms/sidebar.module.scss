@@ -4,4 +4,16 @@
   display: flex;
   flex-direction: column;
   padding: 10px 0 10px 0;
+
+  @media (min-width: 650px) {
+    width: 40%;
+  }
+
+  @media (min-width: 650px) {
+    width: 40%;
+  }
+}
+
+.div {
+  width: calc(100% - 8px);
 }
