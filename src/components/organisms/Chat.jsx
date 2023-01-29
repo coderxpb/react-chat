@@ -6,12 +6,9 @@ import localStyles from "./chat.module.scss";
 const Chat = (props) => {
   return (
     <div className={localStyles.chat}>
-      <div className={localStyles.Messages}>
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
+      <div className={localStyles.chatMessages}>
+        <Message name="Piyush" message="Hey Pankaj" />
+        <Message message="Hello" />
       </div>
       <div className={localStyles.Input}>
         <ChatInput />
