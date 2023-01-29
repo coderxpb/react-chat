@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+input {
+  width: 100%;
+
+  box-sizing: border-box;
+  color: #229954;
+  border: 1px solid #229954;
+  padding: 10px;
+  border-radius: 3px;
+
+  &:focus {
+    outline-color: #229954;
+  }
+
+  &::placeholder {
+    color: #7dcea0;
+  }
+}
+
+.icon {
+  color: #229954;
+  font-size: 24px;
+}
