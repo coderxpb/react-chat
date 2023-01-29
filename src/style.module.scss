@@ -75,6 +75,11 @@
     display: flex;
     gap: 8px;
     padding: 10px 8px 10px 8px;
+
+    &:hover {
+      background: #e9f7ef;
+    }
+
     &Chat {
       display: flex;
       flex-direction: column;

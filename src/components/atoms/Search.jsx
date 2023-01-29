@@ -24,7 +24,7 @@ const Search = () => {
         />
         <div className={classes.userCardChat}>
           <span className={classes.userCardTitle}>Pankaj</span>
-          <span className={classes.userCardSubtitle}>Hey about that </span>
+          {/* <span className={classes.userCardSubtitle}>Hey about that </span> */}
         </div>
       </div>
     </div>
