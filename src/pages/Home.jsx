@@ -6,10 +6,8 @@ import localClasses from "./home.module.scss";
 import { useAuth } from "../context/UserContext";
 
 const Home = () => {
-  const { user } = useAuth();
   return (
     <div className={localClasses.home}>
-      {user.displayName}
       <Navbar />
       <div className={localClasses.homeContainer}>
         <Sidebar />

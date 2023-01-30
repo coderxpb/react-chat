@@ -3,11 +3,10 @@ import FlashMessage from "../components/atoms/FlashMessage";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "../style.module.scss";
 
 const Signup = () => {
-  const [error, setError] = useState(false);
   const [status, setStatus] = useState({ showStatus: false });
   const navigate = useNavigate();
   const onSignup = (isSuccess) => {
@@ -40,7 +39,6 @@ const Signup = () => {
       onSignup(true);
       navigate("/");
     } catch (error) {
-      console.log(error);
       onSignup(false);
     }
   };
@@ -86,8 +84,15 @@ const Signup = () => {
             </label>
             <button className={classes.formButton}>Sign Up</button>
           </form>
-
-          {error && <p className={classes.error}>Something went wrong</p>}
+          <p
+            className={classes.subtitle}
+            style={{ marginTop: "12px", fontSize: "12px" }}
+          >
+            Already have an account?{" "}
+            <Link to="/login">
+              <strong style={{ color: "#229954" }}>Login!</strong>
+            </Link>
+          </p>
         </div>
       </div>
     </div>
