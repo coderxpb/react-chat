@@ -2,9 +2,9 @@ import React from "react";
 import localClasses from "./usercard.module.scss";
 
 const UserCard = (props) => {
-  const { userName, userChat } = props;
+  const { userName, userChat, clickHandler } = props;
   return (
-    <div className={`${localClasses.userCard}`}>
+    <div className={`${localClasses.userCard}`} onClick={clickHandler}>
       <img
         className={localClasses.userImage}
         alt="Default-avatar"
