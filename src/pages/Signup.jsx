@@ -3,12 +3,13 @@ import FlashMessage from "../components/atoms/FlashMessage";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import classes from "../style.module.scss";
 
 const Signup = () => {
   const [error, setError] = useState(false);
   const [status, setStatus] = useState({ showStatus: false });
-
+  const navigate = useNavigate();
   const onSignup = (isSuccess) => {
     setStatus({
       showStatus: true,
@@ -37,6 +38,7 @@ const Signup = () => {
       });
       await setDoc(doc(db, "userChats", data.user.uid), {});
       onSignup(true);
+      navigate("/");
     } catch (error) {
       console.log(error);
       onSignup(false);
