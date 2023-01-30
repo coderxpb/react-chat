@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import FlashMessage from "../components/atoms/FlashMessage";
-import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import classes from "../style.module.scss";
 
 const Signup = () => {
@@ -23,14 +24,21 @@ const Signup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const name = e.target[0].value;
-    const username = e.target[1].value;
-    const email = e.target[2].value;
-    const password = e.target[3].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
 
     try {
       const data = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(data.user, { displayName: name });
+      await setDoc(doc(db, "users", data.user.uid), {
+        uid: data.user.uid,
+        name,
+        email,
+      });
+      await setDoc(doc(db, "userChats", data.user.uid), {});
       onSignup(true);
     } catch (error) {
+      console.log(error);
       onSignup(false);
     }
   };
@@ -55,16 +63,6 @@ const Signup = () => {
               />
             </label>
 
-            <label className={classes.formLabel}>
-              Username
-              <input
-                type="text"
-                minLength={3}
-                required
-                placeholder="Enter your username"
-                className={`${classes.formInput} ${classes.formInputText}`}
-              />
-            </label>
             <label className={classes.formLabel}>
               Email
               <input
