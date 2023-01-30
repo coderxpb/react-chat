@@ -2,13 +2,12 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useContext } from "react";
-import { auth } from "./firebase";
 import { useAuth } from "./context/UserContext";
-
+import { useRoutes } from "react-router-dom";
 function App() {
   const { user } = useAuth();
-  const router = createBrowserRouter([
+
+  const routes = (user) => [
     {
       path: "/",
       element: user ? <Home /> : <Login />,
@@ -21,8 +20,9 @@ function App() {
       path: "/signup",
       element: <Signup />,
     },
-  ]);
-  return <RouterProvider router={router} />;
+  ];
+  const routing = useRoutes(routes(user));
+  return <>{routing}</>;
 }
 
 export default App;

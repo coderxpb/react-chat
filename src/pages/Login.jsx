@@ -31,7 +31,6 @@ const Login = () => {
       onLogin(true);
       navigate("/");
     } catch (error) {
-      console.log(error);
       onLogin(false);
     }
   };

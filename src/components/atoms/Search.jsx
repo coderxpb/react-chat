@@ -1,27 +1,65 @@
 import React, { useState } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDoc,
+  getDocs,
+  setDoc,
+  doc,
+  updateDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import classes from "../../style.module.scss";
 import userClasses from "../molecules/usercard.module.scss";
 import localClasses from "./search.module.scss";
 import { db } from "../../firebase";
+import { useAuth } from "../../context/UserContext";
 const Search = () => {
   const [email, setEmail] = useState("");
   const [newUser, setNewUser] = useState(null);
+  const { user } = useAuth();
   const searchHandler = async (e) => {
     if (e.code == "Enter") {
-      console.log(email);
+      setNewUser(null);
+
       const usersCollection = collection(db, "users");
-      const q = query(usersCollection, where("name", "==", email));
+      const q = query(usersCollection, where("email", "==", email));
       try {
         const users = await getDocs(q);
-        console.log(users);
         users.forEach((doc) => setNewUser(doc.data()));
       } catch (error) {
-        console.log(error);
-        console.log(newUser);
+        setNewUser(null);
       }
-      console.log(newUser);
     }
+  };
+
+  const selectHandler = async (e) => {
+    //unique id which is used to find chats between two users
+    const combinedId =
+      user.uid > newUser.uid ? user.uid + newUser.uid : newUser.uid + user.uid;
+    try {
+      const data = await getDoc(doc(db, "chats", combinedId));
+      if (!data.exists()) {
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
+
+        await updateDoc(doc(db, "userChats", user.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: newUser.uid,
+            name: newUser.name,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+
+        await updateDoc(doc(db, "userChats", newUser.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: user.uid,
+            name: user.name,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+      }
+    } catch (error) {}
   };
 
   return (
@@ -38,7 +76,10 @@ const Search = () => {
       </div>
 
       {newUser && (
-        <div className={`${userClasses.userCard} ${localClasses.userCard}`}>
+        <div
+          className={`${userClasses.userCard} ${localClasses.userCard}`}
+          onClick={selectHandler}
+        >
           <img
             className={userClasses.userImage}
             alt="Default-avatar"
