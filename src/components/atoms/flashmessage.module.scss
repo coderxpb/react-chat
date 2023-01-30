@@ -1,0 +1,30 @@
+.flashmessage {
+  position: absolute;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.status {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 14px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  height: 40px;
+  width: 180px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+
+  &Success {
+    background: #52be80;
+  }
+  &Failure {
+    background: #f1948a;
+  }
+}
