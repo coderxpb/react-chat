@@ -3,6 +3,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: 10px;
+  background: #fff;
 
   @media (min-width: 650px) {
     width: 40%;

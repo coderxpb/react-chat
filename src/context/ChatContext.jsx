@@ -19,7 +19,7 @@ const ChatContextProvider = ({ children }) => {
           chatId:
             user.uid > action.payload.uid
               ? user.uid + action.payload.uid
-              : action.payload.uid.uid + user.uid,
+              : action.payload.uid + user.uid,
         };
       default:
         return state;

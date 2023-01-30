@@ -11,16 +11,16 @@ const Sidebar = () => {
   const [chats, setChats] = useState([]);
   const { user } = useAuth();
   const { dispatch } = useChat();
-  const getChats = () => {
-    const unsub = onSnapshot(doc(db, "userChats", user.uid), (doc) => {
-      setChats(doc.data());
-    });
-    return () => {
-      unsub();
-    };
-  };
 
   useEffect(() => {
+    const getChats = () => {
+      const unsub = onSnapshot(doc(db, "userChats", user.uid), (doc) => {
+        setChats(doc.data());
+      });
+      return () => {
+        unsub();
+      };
+    };
     user.uid && getChats();
   }, [user.uid]);
 
@@ -31,16 +31,18 @@ const Sidebar = () => {
     <div className={localClasses.sidebar}>
       <Search />
       <div className={localClasses.div}>
-        {Object.entries(chats)?.map((chat) => (
-          <UserCard
-            key={chat[0]}
-            userName={chat[1].userInfo.name}
-            userChat={chat[1].userInfo.lastMessage?.text}
-            clickHandler={() => {
-              clickHandler(chat[1].userInfo);
-            }}
-          />
-        ))}
+        {Object.entries(chats)
+          ?.sort((a, b) => b[1].date - a[1].date)
+          .map((chat) => (
+            <UserCard
+              key={chat[0]}
+              userName={chat[1].userInfo.name}
+              userChat={chat[1].lastMessage?.text}
+              clickHandler={() => {
+                clickHandler(chat[1].userInfo);
+              }}
+            />
+          ))}
       </div>
     </div>
   );

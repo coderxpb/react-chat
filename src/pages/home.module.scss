@@ -6,7 +6,8 @@
 
   &Container {
     height: calc(100% - 20px);
-    padding: 10px 0 10px 0;
+    padding: 0 0 10px 0;
     display: flex;
+    background: #f7fffa;
   }
 }
