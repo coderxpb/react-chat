@@ -54,12 +54,16 @@ const Search = () => {
         await updateDoc(doc(db, "userChats", newUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
-            name: user.name,
+            name: user.displayName,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
+    setNewUser(null);
+    setEmail("");
   };
 
   return (
