@@ -21,6 +21,11 @@ const ChatContextProvider = ({ children }) => {
               ? user.uid + action.payload.uid
               : action.payload.uid + user.uid,
         };
+      case "CLOSE_CHAT":
+        return {
+          user: {},
+          chatId: "null",
+        };
       default:
         return state;
     }
