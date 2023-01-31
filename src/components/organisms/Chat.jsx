@@ -10,8 +10,6 @@ import { useAuth } from "../../context/UserContext";
 const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const { data } = useChat();
-  const { user } = useAuth();
-
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
@@ -24,7 +22,7 @@ const Chat = (props) => {
 
   return (
     <div className={localStyles.chat}>
-      {data && (
+      {data && data.chatId != "null" && (
         <>
           <div className={localStyles.chatHeader}>{data.user.name}</div>
           <div className={localStyles.chatMessages}>
@@ -32,7 +30,7 @@ const Chat = (props) => {
               <Message message={m} key={m.id} />
             ))}
           </div>
-          <div className={localStyles.Input}>
+          <div className={localStyles.chatInput}>
             <ChatInput />
           </div>
         </>
