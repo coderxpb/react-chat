@@ -7,13 +7,15 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const [status, setStatus] = useState({ showStatus: false });
+  const [signupInProcess, setSignupInProcess] = useState(false);
+
   const navigate = useNavigate();
 
-  const onLogin = (isSuccess) => {
+  const onLogin = (isSuccess, failureMessage = "Something went wrong") => {
     setStatus({
       showStatus: !isSuccess,
       status: isSuccess,
-      value: isSuccess ? "Logged In." : "Something went wrong.",
+      value: isSuccess ? "Logged In" : failureMessage,
     });
 
     setTimeout(() => {
@@ -25,14 +27,17 @@ const Login = () => {
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
+    setSignupInProcess(true);
 
     try {
       const data = await signInWithEmailAndPassword(auth, email, password);
       onLogin(true);
       navigate("/");
     } catch (error) {
-      onLogin(false);
+      onLogin(false, error.message);
+      setSignupInProcess(false);
     }
+    setSignupInProcess(false);
   };
 
   return (
@@ -48,6 +53,7 @@ const Login = () => {
             <label className={classes.formLabel}>
               Email
               <input
+                disabled={signupInProcess}
                 type="email"
                 minLength={3}
                 required
@@ -58,6 +64,7 @@ const Login = () => {
             <label className={classes.formLabel}>
               Password
               <input
+                disabled={signupInProcess}
                 type="password"
                 minLength={6}
                 required
@@ -65,7 +72,9 @@ const Login = () => {
                 className={`${classes.formInput} ${classes.formInputText}`}
               />
             </label>
-            <button className={classes.formButton}>Log In</button>
+            <button className={classes.formButton}>
+              {signupInProcess ? "Logging in" : "Login"}
+            </button>
           </form>
           <p
             className={classes.subtitle}
