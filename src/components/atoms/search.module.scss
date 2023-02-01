@@ -3,9 +3,15 @@
   margin-left: 8px;
   &Form {
     width: 100%;
-
+    display: flex;
+    align-items: center;
     &Input {
       width: 100%;
+    }
+    &Icon {
+      color: #229954;
+      font-size: 24px;
+      cursor: pointer;
     }
   }
 }

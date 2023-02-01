@@ -15,12 +15,13 @@ import userClasses from "../molecules/usercard.module.scss";
 import localClasses from "./search.module.scss";
 import { db } from "../../firebase";
 import { useAuth } from "../../context/UserContext";
+import { MdSearch } from "react-icons/md";
 const Search = () => {
   const [email, setEmail] = useState("");
   const [newUser, setNewUser] = useState(null);
   const { user } = useAuth();
   const searchHandler = async (e) => {
-    if (e.code == "Enter") {
+    if (e.code == "Enter" || e.isSearch) {
       setNewUser(null);
 
       const usersCollection = collection(db, "users");
@@ -76,6 +77,10 @@ const Search = () => {
           onKeyDown={searchHandler}
           value={email}
           className={`${classes.formInputText} ${localClasses.searchFormInput}`}
+        />
+        <MdSearch
+          className={localClasses.searchFormIcon}
+          onClick={() => searchHandler({ isSearch: true })}
         />
       </div>
 
