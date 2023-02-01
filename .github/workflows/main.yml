@@ -23,7 +23,7 @@ jobs:
         npm install
         npm run build
       env:
-        REACT_APP_APIKey: ${{ secrets.REACT_APP_APIKey }}
+        VITE_FIREBASE_KEY: ${{ secrets.VITE_FIREBASE_KEY }}
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4
